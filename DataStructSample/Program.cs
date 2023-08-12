@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DataStructSample;
 
-Console.WriteLine("Bye, World!");
+Console.WriteLine("cualquiercosaquemediolaganaami");
 
 //int[] arr = new int[4]; // Extensión
 int[] arr = { 1, 2, 3, 4 }; // Comprensión
