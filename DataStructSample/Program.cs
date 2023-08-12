@@ -41,6 +41,8 @@ dataStructSample.PrintDictionary(dict);
 Console.WriteLine($"Value {"hola"} is in dict: {dataStructSample.IsValueInDictionary("hola", dict)}");
 Console.WriteLine($"Value {"Hola"} is in dict: {dataStructSample.IsValueInDictionary("Hola", dict)}");
 
+dict.TryAdd(4, "cualquierotracosa");
+
 //dict.Add(1, "cualquierotracosa");
 dict.TryAdd(1, "cualquierotracosa");
 dataStructSample.PrintDictionary(dict);
