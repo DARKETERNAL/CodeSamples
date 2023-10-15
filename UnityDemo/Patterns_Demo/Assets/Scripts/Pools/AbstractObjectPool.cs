@@ -41,7 +41,6 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
 
         result = pool[0];
         pool.RemoveAt(0);
-        result.transform.parent = null;
         result.Reset(true);
 
         return result;
@@ -49,10 +48,7 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
 
     public void Recycle(T obj)
     {
-        obj.Reset(false);
-        obj.transform.parent = transform;
-        obj.transform.position = transform.position;
-        obj.transform.rotation = transform.rotation;
         pool.Add(obj);
+        obj.Reset(false, transform);
     }
 }
