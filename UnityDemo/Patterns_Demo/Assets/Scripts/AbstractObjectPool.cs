@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public abstract class AbstractObjectPool<T> : MonoBehaviour
+    where T : Object
 {
     public enum EPoolType
     {
@@ -13,12 +14,9 @@ public class ObjectPool : MonoBehaviour
     [SerializeField]
     private int poolSize = 5;
 
-    [SerializeField]
-    private EPoolType poolType = EPoolType.None;
+    private List<T> pool = new List<T>();
 
-    private List<Object> pool = new List<Object>();
-
-    public EPoolType PoolType => poolType;
+    public abstract ObjectPool.EPoolType PoolType { get; }
 
     // Start is called before the first frame update
     private void Start()
@@ -34,8 +32,8 @@ public class ObjectPool : MonoBehaviour
 
     private void CreateObjectInstance()
     {
-        Object objInstance = FactoryFacade.Instance.CreateInstance(PoolType);
-        //objInstance.Pool = this;
+        T objInstance = FactoryFacade.Instance.CreateInstance(PoolType) as T;
+        objInstance.Pool = this;
         Recycle(objInstance);
     }
 

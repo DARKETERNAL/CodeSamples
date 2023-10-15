@@ -5,6 +5,11 @@ public class ObjectFactory : MonoBehaviour
     [SerializeField]
     private Object obj;
 
+    [SerializeField]
+    private ObjectPool.EPoolType objectType = ObjectPool.EPoolType.None;
+
+    public ObjectPool.EPoolType ObjectType => objectType;
+
     public Object CreateInstance()
     {
         Object result = Instantiate(obj);

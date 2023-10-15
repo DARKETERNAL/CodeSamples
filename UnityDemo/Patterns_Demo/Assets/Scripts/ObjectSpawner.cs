@@ -1,14 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
     public static ObjectSpawner Instance { get; private set; }
 
-    [SerializeField]
-    private ObjectPool objPool;
-
-    [SerializeField]
-    private float spawnFrequency;
+    private List<ISpawner> spawners = new List<ISpawner>();
 
     private void Awake()
     {
@@ -22,17 +19,31 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    private void Start()
+    private void Update()
     {
-        InvokeRepeating("InstantiateObjects", 0F, spawnFrequency);
-    }
-
-    private void InstantiateObjects()
-    {
-        if (objPool != null)
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            objPool.Retrieve();
+            ISpawner newSpawner = gameObject.AddComponent<CubeSpawner>();
+            spawners.Add(newSpawner);
+            newSpawner.Spawn();
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            ISpawner newSpawner = gameObject.AddComponent<SphereSpawner>();
+            spawners.Add(newSpawner);
+            newSpawner.Spawn();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            foreach (ISpawner spawner in spawners)
+            {
+                //spawners.Remove(spawner);
+                spawner.Stop();
+            }
+
+            spawners.Clear();
         }
     }
 }
