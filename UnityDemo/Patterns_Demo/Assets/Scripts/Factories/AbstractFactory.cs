@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractFactory<T> : MonoBehaviour
+public abstract class AbstractFactory<T> : MonoBehaviour, IFactory<T>
     where T : Object
 {
     [SerializeField]

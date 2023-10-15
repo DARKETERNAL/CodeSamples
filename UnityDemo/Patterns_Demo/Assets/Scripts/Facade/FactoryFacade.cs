@@ -4,8 +4,7 @@ public class FactoryFacade : MonoBehaviour
 {
     private static FactoryFacade instance;
 
-    [SerializeField]
-    private ObjectFactory[] factories;
+    private IFactory<Object>[] factories;
 
     public static FactoryFacade Instance => instance;
 
@@ -35,5 +34,7 @@ public class FactoryFacade : MonoBehaviour
         {
             Destroy(this);
         }
+
+        factories = GetComponents<IFactory<Object>>();
     }
 }
