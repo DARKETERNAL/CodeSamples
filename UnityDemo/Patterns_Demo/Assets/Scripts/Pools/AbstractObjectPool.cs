@@ -4,13 +4,6 @@ using UnityEngine;
 public abstract class AbstractObjectPool<T> : MonoBehaviour
     where T : Object
 {
-    public enum EPoolType
-    {
-        None,
-        Cube,
-        Sphere
-    }
-
     [SerializeField]
     private int poolSize = 5;
 
@@ -30,7 +23,7 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
         }
     }
 
-    private void CreateObjectInstance()        
+    private void CreateObjectInstance()
     {
         T objInstance = FactoryFacade.Instance.CreateInstance(PoolType) as T;
         objInstance.Pool = this as AbstractObjectPool<Object>;

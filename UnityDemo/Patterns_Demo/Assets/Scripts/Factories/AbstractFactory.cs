@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractFactory<T> : MonoBehaviour, IFactory<T>
+public abstract class AbstractFactory<T> : MonoBehaviour, IFactory
     where T : Object
 {
     [SerializeField]
@@ -12,7 +12,7 @@ public abstract class AbstractFactory<T> : MonoBehaviour, IFactory<T>
 
     public abstract ObjectPool.EPoolType ObjectType { get; }
 
-    public T CreateInstance()
+    public Object CreateInstance()
     {
         T result = Instantiate(obj);
 

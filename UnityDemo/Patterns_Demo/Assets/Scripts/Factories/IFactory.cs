@@ -1,7 +1,6 @@
-public interface IFactory<T>
-    where T : Object
+public interface IFactory
 {
-    T CreateInstance();
-
     ObjectPool.EPoolType ObjectType { get; }
+
+    Object CreateInstance();
 }

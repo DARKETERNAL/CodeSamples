@@ -4,7 +4,7 @@ public class FactoryFacade : MonoBehaviour
 {
     private static FactoryFacade instance;
 
-    private IFactory<Object>[] factories;
+    private IFactory[] factories;
 
     public static FactoryFacade Instance => instance;
 
@@ -35,6 +35,6 @@ public class FactoryFacade : MonoBehaviour
             Destroy(this);
         }
 
-        factories = GetComponents<IFactory<Object>>();
+        factories = GetComponents<IFactory>();
     }
 }
