@@ -14,7 +14,7 @@ public abstract class AbstractFactory<T> : MonoBehaviour, IFactory
 
     public Object CreateInstance()
     {
-        T result = Instantiate(obj);
+        T result = Instantiate(obj);        
 
         instanceRenderer = result.GetComponent<Renderer>();
         instanceRenderer.GetMaterials(instancedMaterials);

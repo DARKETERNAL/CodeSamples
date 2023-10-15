@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractObjectPool<T> : MonoBehaviour
+public abstract class AbstractObjectPool<T> : MonoBehaviour, IPool
     where T : Object
 {
     [SerializeField]
@@ -10,6 +10,8 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
     private List<T> pool = new List<T>();
 
     public abstract ObjectPool.EPoolType PoolType { get; }
+
+    //public AbstractObjectPool<Object> Pool => this as AbstractObjectPool<Object>;
 
     // Start is called before the first frame update
     private void Start()
@@ -26,7 +28,7 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
     private void CreateObjectInstance()
     {
         T objInstance = FactoryFacade.Instance.CreateInstance(PoolType) as T;
-        objInstance.Pool = this as AbstractObjectPool<Object>;
+        objInstance.Pool = this;
         Recycle(objInstance);
     }
 
@@ -43,12 +45,17 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
         pool.RemoveAt(0);
         result.Reset(true);
 
-        return result;
+        return result as T;
     }
 
-    public void Recycle(T obj)
+    private void Recycle(T obj)
     {
         pool.Add(obj);
         obj.Reset(false, transform);
+    }
+
+    public void Recycle(Object obj)
+    {
+        Recycle(obj as T);
     }
 }
