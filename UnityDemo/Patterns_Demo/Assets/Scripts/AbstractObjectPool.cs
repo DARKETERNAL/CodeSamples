@@ -30,16 +30,16 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
         }
     }
 
-    private void CreateObjectInstance()
+    private void CreateObjectInstance()        
     {
         T objInstance = FactoryFacade.Instance.CreateInstance(PoolType) as T;
-        objInstance.Pool = this;
+        objInstance.Pool = this as AbstractObjectPool<Object>;
         Recycle(objInstance);
     }
 
-    public Object Retrieve()
+    public T Retrieve()
     {
-        Object result = null;
+        T result = null;
 
         if (pool.Count < 1)
         {
@@ -54,7 +54,7 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour
         return result;
     }
 
-    public void Recycle(Object obj)
+    public void Recycle(T obj)
     {
         obj.Reset(false);
         obj.transform.parent = transform;

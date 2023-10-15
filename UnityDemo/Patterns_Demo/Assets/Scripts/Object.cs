@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Object : MonoBehaviour
 {
-    public ObjectPool Pool { get; set; }
+    public AbstractObjectPool<Object> Pool { get; set; }
 
     public void Reset(bool activate)
     {
