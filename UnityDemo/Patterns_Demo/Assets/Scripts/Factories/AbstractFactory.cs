@@ -1,19 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractFactory<T> : MonoBehaviour
+public abstract class AbstractFactory<T> : MonoBehaviour
     where T : Object
 {
     [SerializeField]
     private T obj;
 
-    [SerializeField]
-    private ObjectPool.EPoolType objectType = ObjectPool.EPoolType.None;
-
     private Renderer instanceRenderer;
     private List<Material> instancedMaterials = new List<Material>();
 
-    public ObjectPool.EPoolType ObjectType => objectType;
+    public abstract ObjectPool.EPoolType ObjectType { get; }
 
     public T CreateInstance()
     {

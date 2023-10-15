@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
-public class Object : MonoBehaviour
+public abstract class Object : MonoBehaviour
 {
     public AbstractObjectPool<Object> Pool { get; set; }
 
