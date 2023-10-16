@@ -1,10 +1,17 @@
+using UnityEngine;
+
 public delegate void OnColorChange(int stateIndex);
+
+public delegate void OnRequestAnimation(bool animate);
 
 public class ObserverColorSwapper : ColorSwapper
 {
     public static ObserverColorSwapper Instance { get; private set; }
 
     public OnColorChange onColorChange;
+    public OnRequestAnimation onRequestAnimation;
+
+    private bool isAnimating;
 
     private void Awake()
     {
@@ -15,6 +22,16 @@ public class ObserverColorSwapper : ColorSwapper
         else
         {
             Destroy(this);
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ToggleAnimation();
         }
     }
 
@@ -31,5 +48,14 @@ public class ObserverColorSwapper : ColorSwapper
     protected override void ChangeToRed()
     {
         onColorChange?.Invoke(0);
+    }
+
+    private void ToggleAnimation()
+    {
+        if (onRequestAnimation != null)
+        {
+            isAnimating = !isAnimating;
+            onRequestAnimation(isAnimating);
+        }
     }
 }

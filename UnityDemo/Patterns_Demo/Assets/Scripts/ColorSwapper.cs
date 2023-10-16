@@ -26,7 +26,7 @@ public class ColorSwapper : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
