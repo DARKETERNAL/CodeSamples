@@ -5,6 +5,8 @@ public class ColorSwapper : MonoBehaviour
 {
     private BaseStateMachine stateMachine;
 
+    private ICommand redStateCommand, greenStateCommand;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -13,6 +15,9 @@ public class ColorSwapper : MonoBehaviour
 
         IState[] states = { new RedState(Color.red, materials[0]), new GreenState(Color.green, materials[0]) };
         stateMachine = new ColorSwapStateMachine(states);
+
+        redStateCommand = new SetStateMachineState(stateMachine, 0);
+        greenStateCommand = new SetStateMachineState(stateMachine, 1);
     }
 
     // Update is called once per frame
@@ -20,11 +25,11 @@ public class ColorSwapper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            stateMachine.ChangeState(0);
+            redStateCommand?.Execute();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            stateMachine.ChangeState(1);
+            greenStateCommand?.Execute();
         }
     }
 }
