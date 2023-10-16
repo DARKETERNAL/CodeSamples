@@ -11,8 +11,6 @@ public abstract class AbstractObjectPool<T> : MonoBehaviour, IPool
 
     public abstract ObjectPool.EPoolType PoolType { get; }
 
-    //public AbstractObjectPool<Object> Pool => this as AbstractObjectPool<Object>;
-
     // Start is called before the first frame update
     private void Start()
     {

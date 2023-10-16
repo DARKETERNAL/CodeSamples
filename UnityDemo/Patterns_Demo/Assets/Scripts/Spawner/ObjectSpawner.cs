@@ -23,27 +23,28 @@ public class ObjectSpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            ISpawner newSpawner = gameObject.AddComponent<CubeSpawner>();
-            spawners.Add(newSpawner);
-            newSpawner.Spawn();
+            SpawnFromNewSpawner(gameObject.AddComponent<CubeSpawner>());
         }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
-            ISpawner newSpawner = gameObject.AddComponent<SphereSpawner>();
-            spawners.Add(newSpawner);
-            newSpawner.Spawn();
+            SpawnFromNewSpawner(gameObject.AddComponent<SphereSpawner>());
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
             foreach (ISpawner spawner in spawners)
             {
-                //spawners.Remove(spawner);
                 spawner.Stop();
             }
 
             spawners.Clear();
         }
+    }
+
+    private void SpawnFromNewSpawner(ISpawner newSpawner)
+    {
+        spawners.Add(newSpawner);
+        newSpawner.Spawn();
     }
 }

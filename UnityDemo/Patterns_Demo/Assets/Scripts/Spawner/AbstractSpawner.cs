@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AbstractSpawner<T> : MonoBehaviour, ISpawner
@@ -9,6 +7,8 @@ public abstract class AbstractSpawner<T> : MonoBehaviour, ISpawner
     protected float spawnFrequency = 2F;
 
     private AbstractObjectPool<T> objPool;
+
+    
 
     protected abstract ObjectPool.EPoolType PoolType { get; }
 
@@ -24,6 +24,8 @@ public abstract class AbstractSpawner<T> : MonoBehaviour, ISpawner
                 break;
             }
         }
+
+        
     }
 
     public void Spawn()

@@ -1,4 +1,4 @@
-public interface IPool    
+public interface IPool
 {
     void Recycle(Object obj);
 }
