@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ColorSwapper : MonoBehaviour
 {
-    private BaseStateMachine stateMachine;
+    protected BaseStateMachine stateMachine;
 
     private ICommand redStateCommand, greenStateCommand;
 
@@ -14,6 +14,11 @@ public class ColorSwapper : MonoBehaviour
         GetComponent<Renderer>().GetMaterials(materials);
 
         IState[] states = { new RedState(Color.red, materials[0]), new GreenState(Color.green, materials[0]) };
+        SetStateMachine(states);
+    }
+
+    protected virtual void SetStateMachine(IState[] states)
+    {
         stateMachine = new ColorSwapStateMachine(states);
 
         redStateCommand = new SetStateMachineState(stateMachine, 0);
@@ -25,11 +30,21 @@ public class ColorSwapper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            redStateCommand?.Execute();
+            ChangeToRed();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            greenStateCommand?.Execute();
+            ChangeToGreen();
         }
+    }
+
+    protected virtual void ChangeToGreen()
+    {
+        greenStateCommand?.Execute();
+    }
+
+    protected virtual void ChangeToRed()
+    {
+        redStateCommand?.Execute();
     }
 }
